@@ -10,9 +10,9 @@ class Habit(models.Model):
     action = models.CharField(max_length=200, verbose_name="Действие", help_text="Укажите действие, которое представляет собой привычка")
     is_pleasant_habit = models.BooleanField(verbose_name="Признак приятной привычки", help_text="Укажите, является ли привычка приятной")
     associated_habit = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Связанная привычка", help_text="Укажите связанную привычку")
-    periodicity = models.SmallIntegerField(default=1, verbose_name="Периодичность", help_text="Укажите периодичность выполнения привычки")
+    periodicity = models.SmallIntegerField(default=1, verbose_name="Периодичность", help_text="Укажите периодичность выполнения привычки, раз в 7 дней")
     reward = models.CharField(max_length=200, null=True, blank=True, verbose_name="Вознаграждение", help_text="Укажите вознаграждение после выполнения привычки")
-    time_complete = models.TimeField(null=True, blank=True, verbose_name="Продолжительность выполнения", help_text="Укажите продолжительность выполнения привычки")
+    duration = models.PositiveIntegerField(null=True, blank=True, verbose_name="Продолжительность выполнения в секундах", help_text="Укажите продолжительность выполнения привычки в секундах")
     is_published = models.BooleanField(verbose_name="Признак публикации", help_text="Укажите, необходимо ли публикация")
 
     class Meta:

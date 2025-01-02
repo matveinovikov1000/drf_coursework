@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "users",
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -34,6 +36,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -103,9 +106,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "users.User"
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
 SIMPLE_JWT = {
