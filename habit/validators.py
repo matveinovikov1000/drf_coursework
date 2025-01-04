@@ -11,7 +11,10 @@ class ValidateAssociatedHabitOrReward:
         mean_reward = dict(value).get(self.reward)
 
         if mean_associated_habit and mean_reward:
-            raise ValidationError(f"Поле {"Связанная привычка"} не может быть заполнено одновременно с полем {"Вознаграждение"}")
+            raise ValidationError(
+                f"Поле {"Связанная привычка"} не может быть заполнено "
+                f"одновременно с полем {"Вознаграждение"}"
+            )
 
 
 class ValidateDuration:
@@ -21,8 +24,11 @@ class ValidateDuration:
     def __call__(self, value):
         mean_time_complete = dict(value).get(self.duration)
 
-        if int(mean_time_complete) > 120:
-            raise ValidationError("Время выполнения привычки должно быть не более 120 секунд")
+        if mean_time_complete:
+            if int(mean_time_complete) > 120:
+                raise ValidationError(
+                    "Время выполнения привычки должно быть не более 120 секунд"
+                )
 
 
 class ValidateAssociatedHabit:
@@ -49,7 +55,9 @@ class ValidatePleasantHabit:
         mean_reward = dict(value).get(self.reward)
 
         if mean_is_pleasant_habit and mean_associated_habit or mean_reward:
-            raise ValidationError("У приятной привычки не может быть вознаграждения или связанной привычки")
+            raise ValidationError(
+                "У приятной привычки не может быть вознаграждения или связанной привычки"
+            )
 
 
 class ValidatePeriodicity:
@@ -59,5 +67,8 @@ class ValidatePeriodicity:
     def __call__(self, value):
         mean_field = dict(value).get(self.field)
 
-        if int(mean_field) == 0:
-            raise ValidationError("Периодичность выполнения привычки должна быть не реже 1 раза в 7 дней")
+        if mean_field:
+            if int(mean_field) == 0:
+                raise ValidationError(
+                    "Периодичность выполнения привычки должна быть не реже 1 раза в 7 дней"
+                )
