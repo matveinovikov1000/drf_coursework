@@ -23,6 +23,7 @@ celery = "^5.4.0"
 eventlet = "^0.38.2"
 django-celery-beat = "^2.7.0"
 requests = "^2.32.3"
+gunicorn = "^23.0.0"
 
 
 [build-system]
